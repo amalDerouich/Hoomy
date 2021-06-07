@@ -1,0 +1,245 @@
+<div class="container-fluid">
+  <div class="row page-title align-items-center">
+    <div class="col-sm-4 col-xl-6">
+      <h4 class="mb-1 mt-0">Tableau de bord</h4>
+    </div>
+    <div class="col-sm-8 col-xl-6">
+      <form class="form-inline float-sm-right mt-3 mt-sm-0">
+        <div class="form-group mb-sm-0 mr-2">
+          <input type="text" class="form-control" id="dashdaterange" style="min-width: 208px;"
+            placeholder="2021-03-03 to 2021-06-10" mwlFlatpickr [convertModelValue]="true" mode="range" />
+        </div>
+        <div class="btn-group" ngbDropdown>
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle>
+            <i class='uil uil-file-alt mr-1'></i>Télécharger
+            <i class="icon"><span>
+                <i data-feather="chevron-down"></i>
+              </span></i></button>
+          <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+            <a href="javascript: void(0);" class="dropdown-item notify-item">
+              <i data-feather="mail" class="icon-dual icon-xs mr-2"></i>
+              <span> Email</span>
+            </a>
+            <a href="javascript: void(0);" class="dropdown-item notify-item">
+              <i data-feather="printer" class="icon-dual icon-xs mr-2"></i>
+              <span> Imprimer</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="javascript: void(0);" class="dropdown-item notify-item">
+              <i data-feather="file" class="icon-dual icon-xs mr-2"></i>
+              <span> Régénérer</span>
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Widget  -->
+  <div class="row">
+    <div class="col-md-6 col-xl-3">
+      <app-statchart mainTitle="Électricité" value=210KW subValue="10.21%" chartColors="#5369f8"></app-statchart>
+    </div>
+    <div class="col-md-6 col-xl-3">
+      <app-statchart mainTitle="Température" value=27° subValue='5.05%' chartColors="#f77e53"></app-statchart>
+    </div>
+    <div class="col-md-6 col-xl-3">
+      <app-statchart mainTitle="Humidité" value=67% subValue="25.16%" chartColors="#43d39e"></app-statchart>
+    </div>
+    <div class="col-md-6 col-xl-3">
+      <app-statchart mainTitle="Devices" value=4 subValue="5.05%" chartColors="#ffbe0b"></app-statchart>
+    </div>
+  </div>
+  <!-- end widget -->
+  <div class="row">
+    <div class="col-xl-3">
+      <div class="card">
+        <div class="card-body p-0">
+          <h5 class="card-title header-title border-bottom p-3 mb-0">Mes Devices</h5>
+          <!-- Overview data -->
+          <app-overview value='Système musical' icon='speaker' title="En Fonction" classNames="px-3 py-4">
+          </app-overview>
+          <app-overview value='Routeur' icon='wifi' title="En Fonction" classNames="px-3 py-4">
+          </app-overview>
+          <app-overview value='TV' icon='airplay' title="En Fonction" classNames="px-3 py-4"></app-overview>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6">
+      <div class="card">
+        <div class="card-body pb-0">
+          <ul class="nav card-nav float-right">
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="javascript: void(0);">Aujourd'hui</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="javascript: void(0);">7j</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="javascript: void(0);">15j</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="javascript: void(0);">1m</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="javascript: void(0);">1a</a>
+            </li>
+          </ul>
+          <h5 class="card-title header-title mb-0">Électricité consommée</h5>
+          <!-- Reenue Area Chart -->
+          <div class="mt-3">
+            <apx-chart [series]="revenueAreaChart.series" [chart]="revenueAreaChart.chart"
+              [tooltip]="revenueAreaChart.tooltip" [colors]="revenueAreaChart.colors"
+              [dataLabels]="revenueAreaChart.dataLabels" [stroke]="revenueAreaChart.stroke" [grid]="revenueAreaChart.grid"
+              [fill]="revenueAreaChart.fill" [yaxis]="revenueAreaChart.yaxis" [xaxis]="revenueAreaChart.xaxis">
+            </apx-chart>
+          </div>
+          <!-- end revenue chart -->
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3">
+      <div class="card">
+        <div class="card-body pb-0">
+          <h5 class="card-title header-title">Mes Economies</h5>
+          <!-- Target bar chart -->
+          <div class="mt-3">
+            <apx-chart [series]="targetsBarChart.series" [chart]="targetsBarChart.chart"
+              [colors]="targetsBarChart.colors" [plotOptions]="targetsBarChart.plotOptions"
+              [tooltip]="targetsBarChart.tooltip"
+              [yaxis]="targetsBarChart.yaxis" [legend]="targetsBarChart.legend" [xaxis]="targetsBarChart.xaxis"
+              [dataLabels]="targetsBarChart.dataLabels" [labels]="targetsBarChart.labels">
+            </apx-chart>
+          </div>
+          <!-- end target chart -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-5">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title header-title mt-0 pb-2">Sales By Category</h5>
+          <!-- Sales donut chart -->
+          <apx-chart [series]="salesDonutChart.series" [chart]="salesDonutChart.chart"
+            [plotOptions]="salesDonutChart.plotOptions" [responsive]="salesDonutChart.responsive"
+            [legend]="salesDonutChart.legend" [labels]="salesDonutChart.labels" [tooltip]="salesDonutChart.tooltip"
+            [colors]="salesDonutChart.colors">
+          </apx-chart>
+          <!-- end sales chart -->
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-7">
+      <div class="card">
+        <div class="card-body">
+          <a href="javascript: void(0);" class="btn btn-primary btn-sm float-right">
+            <i class="uil uil-export ml-1"></i> Exporter
+          </a>
+          <h5 class="card-title header-title mt-0 mb-0">Dérniers Factures</h5>
+          <div class="table-responsive mt-4">
+            <table class="table table-hover table-nowrap mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Facture</th>
+                  <th scope="col">Fournisseur</th>
+                  <th scope="col">A payer</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let table of ordersData">
+                  <td>{{ table.id }}</td>
+                  <td>{{ table.product }}</td>
+                  <td>{{ table.name }}</td>
+                  <td>{{ table.price }}</td>
+                  <td><span class="badge py-1" [ngClass]="{
+                                        'badge-soft-warning': table.status === 'En cours',
+                                        'badge-soft-success': table.status === 'Payer',  
+                                        'badge-soft-danger': table.status === 'Non Payer'  
+                                    }">{{ table.status }}</span></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div><!-- end table -->
+        </div><!-- end card-body -->
+      </div><!-- end card -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-4">
+      <div class="card">
+        <div class="card-body pt-2 pb-2">
+          <h5 class="mb-4 header-title">Membres</h5>
+          <app-members image="assets/images/users/avatar-7.jpg" text="Admin" name="Amal D">
+          </app-members>
+          <app-members image="assets/images/users/avatar-9.jpg" text="Full Access" name="Ala KH">
+          </app-members>
+          <app-members image="assets/images/users/avatar-4.jpg" text="Full Access" name="Nadia A">
+          </app-members>
+          <app-members image="assets/images/users/avatar-1.jpg" text="Full Access" name="Sabrine A">
+          </app-members>
+          <app-members image="assets/images/users/avatar-5.jpg" text="Full Access" name="Aymen S">
+          </app-members>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4">
+      <div class="card">
+        <div class="card-body pt-2 pb-3">
+          <a routerLink="/task-list" class="btn btn-primary btn-sm mt-2 float-right">
+            Valider
+          </a>
+          <h5 class="mb-4 header-title">Actions Suggérer</h5>
+
+          <div class="slimscroll" style="max-height: 390px;" appSlimScroll>
+            <app-task title="Faites la chasse aux appareils en veille" text="Urgent" id=1>
+            </app-task>
+            <app-task title="Faites le point sur votre consommation d’électricité" text="Urgent" id=2>
+            </app-task>
+            <app-task title="Entretenez votre linge" text="Urgent" id=3>
+            </app-task>
+            <app-task title="Réchauffez au four à micro-ondes" text="Urgent" id=4>
+            </app-task>
+            <app-task title="Optez pour des plaques de cuisson à induction " text="Urgent" id=5>
+            </app-task>
+            <app-task title="Optez pour la climatisation naturelle" text="Urgent" id=6>
+            </app-task>
+            <app-task title="Utilisez des ampoules à économie d’énergie" text="Urgent" id=7>
+            </app-task>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4">
+      <div class="card">
+        <div class="card-body pt-2">
+          <div class="dropdown mt-2 float-right" ngbDropdown>
+            <a href="javascript: void(0);" class="dropdown-toggle arrow-none text-muted" ngbDropdownToggle>
+              <i class="uil uil-ellipsis-v"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+              <!-- item-->
+              <a href="javascript:void(0);" class="dropdown-item"><i class="uil uil-refresh mr-2"></i>Rafraîchir</a>
+              <!-- item-->
+              <a href="javascript:void(0);" class="dropdown-item"><i class="uil uil-user-plus mr-2"></i>Ajouter un membre</a>
+              <div class="dropdown-divider"></div>
+              <!-- item-->
+              <a href="javascript:void(0);" class="dropdown-item text-danger"><i class="uil uil-exit mr-2"></i>Sortir</a>
+            </div>
+          </div>
+          <h5 class="mb-4 header-title">Conversation récente</h5>
+          <div class="chat-conversation">
+            <app-chat maxHeight="328"></app-chat>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
